@@ -44,7 +44,7 @@ namespace TeduBlog.Data
                 {
                     RoleId = rootAdminRoleId,
                     UserId = userId,
-                });
+                });//thêm user vào bảng UserRoles với vai trò là RootAdmin
                 await context.SaveChangesAsync();//lưu thay đổi vào cơ sở dữ liệu
             }
         }
