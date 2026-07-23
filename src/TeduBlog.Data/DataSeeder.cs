@@ -21,9 +21,9 @@ namespace TeduBlog.Data
                 await context.SaveChangesAsync();
             }
 
-            if (!context.Users.Any())
+            if (!context.Users.Any())//nếu chưa có user nào trong bảng Users    
             {
-                var userId = Guid.NewGuid();
+                var userId = Guid.NewGuid();//tạo một Guid mới cho userId
                 var user = new AppUser()
                 {
                     Id = userId,
@@ -37,8 +37,8 @@ namespace TeduBlog.Data
                     SecurityStamp = Guid.NewGuid().ToString(),
                     LockoutEnabled = false,
                     DateCreated = DateTime.Now
-                };
-                user.PasswordHash = passwordHasher.HashPassword(user, "Admin@123$");
+                };//tạo một user mới với các thông tin cơ bản
+                user.PasswordHash = passwordHasher.HashPassword(user, "Admin@123$");//mã hóa mật khẩu của user là Admin@123$
                 await context.Users.AddAsync(user);//thêm user vào bảng Users
                 await context.UserRoles.AddAsync(new IdentityUserRole<Guid>()
                 {
