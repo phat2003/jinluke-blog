@@ -9,7 +9,7 @@ namespace TeduBlog.Data
         {
             var passwordHasher = new PasswordHasher<AppUser>();//tạo một đối tượng PasswordHasher để mã hóa mật khẩu của user
             var rootAdminRoleId = Guid.NewGuid();//tạo một Guid mới cho vai trò RootAdmin
-            if (!context.Roles.Any())
+            if (!context.Roles.Any())//nếu chưa có vai trò nào trong bảng Roles
             {
                 await context.Roles.AddAsync(new AppRole()
                 {
@@ -18,13 +18,13 @@ namespace TeduBlog.Data
                     NormalizedName = "ADMIN",
                     DisplayName = "Quản trị viên"
                 });//thêm một vai trò mới vào bảng Roles với tên là RootAdmin
-                await context.SaveChangesAsync();
-            }//lưu thay đổi vào cơ sở dữ liệu
+                await context.SaveChangesAsync();//lưu thay đổi vào cơ sở dữ liệu
+            }
 
             if (!context.Users.Any())//nếu chưa có user nào trong bảng Users    
             {
                 var userId = Guid.NewGuid();//tạo một Guid mới cho userId
-                var user = new AppUser()
+                var user = new AppUser()//tạo một đối tượng AppUser mới
                 {
                     Id = userId,
                     FirstName = "Toan",
