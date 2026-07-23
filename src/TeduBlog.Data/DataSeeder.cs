@@ -7,8 +7,8 @@ namespace TeduBlog.Data
     {
         public async Task SeedAsync(TeduBlogContext context)
         {
-            var passwordHasher = new PasswordHasher<AppUser>();
-            var rootAdminRoleId = Guid.NewGuid();
+            var passwordHasher = new PasswordHasher<AppUser>();//tạo một đối tượng PasswordHasher để mã hóa mật khẩu của user
+            var rootAdminRoleId = Guid.NewGuid();//tạo một Guid mới cho vai trò RootAdmin
             if (!context.Roles.Any())
             {
                 await context.Roles.AddAsync(new AppRole()
@@ -17,9 +17,9 @@ namespace TeduBlog.Data
                     Name = "RootAdmin",
                     NormalizedName = "ADMIN",
                     DisplayName = "Quản trị viên"
-                });
+                });//thêm một vai trò mới vào bảng Roles với tên là RootAdmin
                 await context.SaveChangesAsync();
-            }
+            }//lưu thay đổi vào cơ sở dữ liệu
 
             if (!context.Users.Any())//nếu chưa có user nào trong bảng Users    
             {
