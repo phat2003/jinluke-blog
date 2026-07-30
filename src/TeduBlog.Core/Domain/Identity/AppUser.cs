@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TeduBlog.Core.Domain.Identity
 {
-    [Table("AppUsers")]
+    [Table("AppUsers")]//tạo bảng với tên AppUsers trong cơ sở dữ liệu, vì mặc định Identity sẽ ghi là AspNetUsers nên mình đổi lại cho dễ nhìn
     public class AppUser : IdentityUser<Guid>
     {
         [Required]

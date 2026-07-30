@@ -2,13 +2,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TeduBlog.Api;
 using TeduBlog.Core.Domain.Identity;
+using TeduBlog.Core.SeedWorks;
 using TeduBlog.Data;
+using TeduBlog.Data.SeedWorks;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
-var connectionString = configuration.GetConnectionString("DefaultConnection");
-// Add services to the container.
-
+var configuration = builder.Configuration;//Lấy đối tượng IConfiguration từ builder để truy cập các thiết lập cấu hình, chẳng hạn như chuỗi kết nối cơ sở dữ liệu.
+var connectionString = configuration.GetConnectionString("DefaultConnection");//Lấy chuỗi kết nối cơ sở dữ liệu từ tệp cấu hình (appsettings.json) với tên "DefaultConnection".
 //Config DB Context and ASP.NET Core Identity
 builder.Services.AddDbContext<TeduBlogContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -36,6 +36,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = false;
 });
+
+// Add services to the container.
+builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
