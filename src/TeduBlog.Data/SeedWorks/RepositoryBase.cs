@@ -9,8 +9,8 @@ namespace TeduBlog.Data.SeedWorks
         private readonly DbSet<T> _dbSet;
         protected readonly TeduBlogContext _context;
         public RepositoryBase(TeduBlogContext context) { 
-            _context = context;
             _dbSet = context.Set<T>();
+            _context = context;
         }
         public void Add(T entity)
         {
