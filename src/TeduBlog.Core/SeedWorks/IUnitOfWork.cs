@@ -2,6 +2,6 @@
 {
     public interface IUnitOfWork
     {
-        Task<int> CompleteAsync();
+        Task<int> CompleteAsync();// Commit changes to the database asynchronously
     }
 }
